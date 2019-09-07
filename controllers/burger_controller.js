@@ -6,7 +6,7 @@ var burger = require("../models/burger.js");
 
 
 router.get("/", function (req, res) {
-    burger.selectAll(function (data) {
+    burger.all(function (data) {
         var hbsObject = {
             burgers: data
         };
@@ -16,7 +16,7 @@ router.get("/", function (req, res) {
 });
 
 router.post("/api/burgers", function (req, res) {
-    burger.insertOne(["burger_name", "devoured"],
+    burger.insertOne(["burgers_name", "devoured"],
         [req.body.burger_name, req.body.devoured], function (result) {
             res.json({ id: result.insertId });
         });
@@ -47,3 +47,4 @@ router.delete("/api/burgers/:id", function (req, res) {
     });
 });
 
+module.exports = router;
