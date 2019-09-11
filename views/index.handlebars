@@ -4,10 +4,11 @@
 <div id='burgersavavalible'>
     <h3> Burgers That You Can Eat: </h3>
     <ul>
-        {{#each burgers}} {{#unless this.devoured}}
         <li>
-            {{this.id}}. {{this.burgers_name}}
-             <form action="/{{this.id}}?_method=PUT" method="POST">
+            {{#each burgers}} {{#unless devoured}}
+
+            {{> burgers/burger-block devoured=true}}
+            <form action="/{{id}}?_method=PUT" method="POST">
                 <input type="hidden" name="devoured" value="false">
                 <button class="btn btn-warning" type="submit">Eat Me!</button>
             </form>
@@ -17,25 +18,27 @@
 
 </div>
 <div id='devoured'>
-    <h2>Burgers That Have <br>Been Devoured: </h2>
+    <h2>Burgers That Have Been Devoured: </h2>
 
     <ul>
-        {{#each burgers}} {{#if this.devoured}}
+        {{#each burgers}} {{#if devoured}}
         <li>
-            {{this.id}}. {{this.burgers_name}}
+            {{> burgers/burger-block devoured=false}}
         </li>
-        {{/if}} {{/each}}
+        {{/if}} 
+        {{/each}}
     </ul>
 </div>
 
 <div id='add'>
     <h2>Add a Burger: </h2>
 
-    <form class="create-update-form" action="/" method="POST">
+    <form class="create-form"  method="POST">
         <div class="form-group">
-            <label for="dab">Burger Name:</label>
-            <input type="text" id="dab" name="burgers_name">
+            <label for="ba">Burger Name:</label>
+            <input type="text" id="ba" name="burger_name">
         </div>
+       
         <button class="btn btn-primary" type="submit">Add Burger</button>
     </form>
 </div>
